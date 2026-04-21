@@ -584,25 +584,149 @@
       transition: transform 0.3s ease;
     }
     .step-num:hover { transform: scale(1.1) rotate(-6deg); }
+    .step-num .step-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+    .step-num:hover .step-label { opacity: 0; }
+    .step-num:hover .step-icon { opacity: 1; }
+    .step-num .step-label { transition: opacity 0.3s ease; position: relative; }
+
+    .step-card {
+      background: linear-gradient(180deg, rgba(34,211,238,0.04) 0%, rgba(168,85,247,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 1.25rem 1.1rem 1.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .step-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--step-c, #22d3ee) 0%, transparent 80%);
+      opacity: 0.05;
+      pointer-events: none;
+    }
+    .step-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--step-c, rgba(34,211,238,0.5));
+      box-shadow: 0 18px 40px -20px var(--step-c, rgba(34,211,238,0.5));
+    }
+    .step-corner {
+      position: absolute; top: 10px; right: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      color: rgba(226,232,240,0.45);
+    }
+    .step-meta {
+      display: flex; gap: 0.6rem; margin-top: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .step-meta span {
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(226,232,240,0.75);
+    }
+    .step-duration {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.9rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--step-c, #22d3ee);
+    }
+    .step-duration::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; box-shadow: 0 0 10px currentColor;
+      animation: dsPulse 1.6s ease-in-out infinite;
+    }
+
+    .flow-rail {
+      position: absolute; left: 0; right: 0; top: 36px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,0.35) 10%, rgba(168,85,247,0.4) 50%, rgba(236,72,153,0.35) 90%, transparent);
+      opacity: 0.5;
+    }
+    .flow-rail::after {
+      content: ''; position: absolute; top: -1px; left: 0;
+      width: 40px; height: 4px; border-radius: 4px;
+      background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+      box-shadow: 0 0 12px #22d3ee;
+      animation: flowPulse 5s linear infinite;
+    }
+    @keyframes flowPulse {
+      0% { left: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
 
     /* ========================================================
        TECH STACK
        ======================================================== */
-    .tech-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: transform 0.35s cubic-bezier(.2,.9,.3,1.4), box-shadow 0.35s ease, border-color 0.35s ease;
+    .tech-chip {
+      height: 52px;
+      padding: 0 18px;
+      border-radius: 14px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: rgba(226, 232, 240, 0.9);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      transition: transform 0.35s cubic-bezier(.2,.9,.3,1.4), box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .tech-icon:hover {
-      transform: translateY(-8px) rotate(-6deg) scale(1.1);
-      border-color: rgba(34, 211, 238, 0.5);
-      box-shadow: 0 15px 30px -10px rgba(34, 211, 238, 0.5), 0 0 20px rgba(168, 85, 247, 0.35);
+    .tech-chip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--tech-c1, #22d3ee), var(--tech-c2, #a855f7));
+      opacity: 0.08;
+      pointer-events: none;
     }
-    .tech-icon img { width: 36px; height: 36px; }
+    .tech-chip .tech-dot {
+      width: 10px; height: 10px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--tech-c1, #22d3ee), var(--tech-c2, #a855f7));
+      box-shadow: 0 0 12px var(--tech-c1, #22d3ee);
+      flex-shrink: 0;
+    }
+    .tech-chip:hover {
+      transform: translateY(-4px) scale(1.05);
+      border-color: var(--tech-c1, rgba(34, 211, 238, 0.55));
+      box-shadow: 0 14px 28px -10px rgba(34,211,238,0.35), 0 0 20px rgba(168, 85, 247, 0.25);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .tech-chip.t-python  { --tech-c1:#22d3ee; --tech-c2:#3b82f6; }
+    .tech-chip.t-js      { --tech-c1:#f7df1e; --tech-c2:#f59e0b; }
+    .tech-chip.t-ts      { --tech-c1:#3178c6; --tech-c2:#22d3ee; }
+    .tech-chip.t-aws     { --tech-c1:#ff9900; --tech-c2:#ec4899; }
+    .tech-chip.t-azure   { --tech-c1:#0078d4; --tech-c2:#22d3ee; }
+    .tech-chip.t-gcp     { --tech-c1:#4285f4; --tech-c2:#a855f7; }
+    .tech-chip.t-docker  { --tech-c1:#2496ed; --tech-c2:#22d3ee; }
+    .tech-chip.t-k8s     { --tech-c1:#326ce5; --tech-c2:#a855f7; }
+    .tech-chip.t-tf      { --tech-c1:#ff6f00; --tech-c2:#ec4899; }
+    .tech-chip.t-pytorch { --tech-c1:#ee4c2c; --tech-c2:#f59e0b; }
+    .tech-chip.t-openai  { --tech-c1:#10a37f; --tech-c2:#22d3ee; }
+    .tech-chip.t-hf      { --tech-c1:#ffd21e; --tech-c2:#ec4899; }
+    .tech-chip.t-lc      { --tech-c1:#10b981; --tech-c2:#22d3ee; }
+    .tech-chip.t-airflow { --tech-c1:#017cee; --tech-c2:#a855f7; }
+    .tech-chip.t-spark   { --tech-c1:#e25a1c; --tech-c2:#f59e0b; }
+    .tech-chip.t-react   { --tech-c1:#61dafb; --tech-c2:#22d3ee; }
+    .tech-chip.t-node    { --tech-c1:#339933; --tech-c2:#10b981; }
+    .tech-chip.t-pg      { --tech-c1:#4169e1; --tech-c2:#a855f7; }
+    .tech-chip.t-tf2     { --tech-c1:#7b42bc; --tech-c2:#ec4899; }
+    .tech-chip.t-llama   { --tech-c1:#a855f7; --tech-c2:#ec4899; }
+    .tech-chip.t-claude  { --tech-c1:#d97757; --tech-c2:#f59e0b; }
 
     /* Marquee ------------------------------- */
     .marquee {
@@ -2493,20 +2617,22 @@
             <p class="text-slate-400 text-sm leading-relaxed">Connect legacy systems, APIs, and big-data platforms to ensure reliable data flow and functionality.</p>
           </div>
 
-          <!-- Card 5: GEN AI -->
+          <!-- Card 5: GEN AI (spans 2 cols) -->
           <div class="card-neon card-holo glass p-7 tilt reveal reveal-delay-4 relative overflow-hidden lg:col-span-2">
             <span class="holo-rainbow"></span>
             <span class="holo-shine"></span>
-            <!-- "NEW" ribbon -->
-            <div class="absolute top-4 right-4 text-[0.58rem] tracking-[0.3em] px-2 py-1 rounded-full border border-neon-pink/60 text-neon-pink bg-neon-pink/10" style="font-family:'Space Grotesk',sans-serif;">NEW · GEN AI</div>
 
-            <div class="flex items-start gap-5">
-              <div class="w-14 h-14 shrink-0 rounded-2xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan flex items-center justify-center shadow-lg shadow-neon-purple/40 relative">
-                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
-                </svg>
-              </div>
+            <div class="grid md:grid-cols-[1fr,260px] gap-6 items-start relative z-10">
+              <!-- LEFT: title + copy + tags -->
               <div>
+                <div class="flex items-center gap-3 mb-4 flex-wrap">
+                  <div class="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan flex items-center justify-center shadow-lg shadow-neon-purple/40">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+                    </svg>
+                  </div>
+                  <span class="text-[0.58rem] tracking-[0.3em] px-2 py-1 rounded-full border border-neon-pink/60 text-neon-pink bg-neon-pink/10" style="font-family:'Space Grotesk',sans-serif;">NEW · GEN AI</span>
+                </div>
                 <h4 class="font-display text-xl font-bold text-white mb-2">Generative AI & LLM Engineering</h4>
                 <p class="text-slate-400 text-sm leading-relaxed">Production-ready LLM agents, retrieval-augmented generation, and fine-tuned models. Governed, evaluated, cost-aware — built to actually ship, not just demo.</p>
                 <div class="mt-4 flex flex-wrap gap-2">
@@ -2516,28 +2642,84 @@
                   <span class="text-[0.62rem] uppercase tracking-[0.22em] px-2.5 py-1 rounded-md bg-neon-blue/10 border border-neon-blue/30 text-neon-blue" style="font-family:'Space Grotesk',sans-serif;">Guardrails</span>
                   <span class="text-[0.62rem] uppercase tracking-[0.22em] px-2.5 py-1 rounded-md bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan" style="font-family:'Space Grotesk',sans-serif;">Evals</span>
                 </div>
+
+                <!-- Stack row -->
+                <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[0.68rem] uppercase tracking-[0.22em] text-slate-400" style="font-family:'Space Grotesk',sans-serif;">
+                  <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neon-cyan shadow-[0_0_8px_#22d3ee]"></span>GPT-4 / Claude</span>
+                  <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neon-purple shadow-[0_0_8px_#a855f7]"></span>Llama</span>
+                  <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neon-pink shadow-[0_0_8px_#ec4899]"></span>LangChain</span>
+                  <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neon-blue shadow-[0_0_8px_#3b82f6]"></span>Pinecone</span>
+                </div>
+
+                <!-- Mini KPI row -->
+                <div class="mt-6 grid grid-cols-3 gap-3 max-w-md">
+                  <div class="rounded-xl border border-white/8 bg-white/[0.03] p-3">
+                    <div class="text-xs uppercase tracking-widest text-slate-500" style="font-family:'Space Grotesk',sans-serif;">Accuracy</div>
+                    <div class="font-display text-lg font-bold text-gradient">94%</div>
+                  </div>
+                  <div class="rounded-xl border border-white/8 bg-white/[0.03] p-3">
+                    <div class="text-xs uppercase tracking-widest text-slate-500" style="font-family:'Space Grotesk',sans-serif;">Latency</div>
+                    <div class="font-display text-lg font-bold text-gradient">42ms</div>
+                  </div>
+                  <div class="rounded-xl border border-white/8 bg-white/[0.03] p-3">
+                    <div class="text-xs uppercase tracking-widest text-slate-500" style="font-family:'Space Grotesk',sans-serif;">Cost/1k</div>
+                    <div class="font-display text-lg font-bold text-gradient">$0.002</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT: larger LLM viz -->
+              <div class="relative flex flex-col items-center justify-center min-h-[240px]">
+                <svg class="w-full max-w-[260px] aspect-square opacity-95" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="svcAiG" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#22d3ee"/>
+                      <stop offset="0.5" stop-color="#a855f7"/>
+                      <stop offset="1" stop-color="#ec4899"/>
+                    </linearGradient>
+                    <radialGradient id="svcAiCore" cx="0.5" cy="0.5" r="0.5">
+                      <stop offset="0" stop-color="rgba(168,85,247,0.6)"/>
+                      <stop offset="1" stop-color="rgba(34,211,238,0)"/>
+                    </radialGradient>
+                  </defs>
+                  <!-- Halo -->
+                  <circle cx="130" cy="130" r="110" fill="url(#svcAiCore)"/>
+                  <!-- Ambient rings -->
+                  <circle cx="130" cy="130" r="108" fill="none" stroke="rgba(168,85,247,0.18)" stroke-width="1" stroke-dasharray="2 5"/>
+                  <circle cx="130" cy="130" r="82" fill="none" stroke="rgba(34,211,238,0.2)" stroke-width="1"/>
+                  <!-- Core -->
+                  <circle cx="130" cy="130" r="44" fill="none" stroke="url(#svcAiG)" stroke-width="2">
+                    <animate attributeName="r" values="40;50;40" dur="3s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="130" cy="130" r="22" fill="url(#svcAiG)" opacity="0.85">
+                    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                  <text x="130" y="134" text-anchor="middle" font-family="Space Grotesk" font-size="10" font-weight="700" fill="#fff" letter-spacing="2">LLM</text>
+                  <!-- Orbiting satellites -->
+                  <g style="transform-origin:130px 130px; animation: sceneRotate 18s linear infinite;">
+                    <circle cx="130" cy="22" r="4" fill="#22d3ee"/>
+                    <circle cx="130" cy="22" r="8" fill="none" stroke="#22d3ee" opacity="0.4"/>
+                    <circle cx="238" cy="130" r="3.5" fill="#a855f7"/>
+                    <circle cx="130" cy="238" r="4" fill="#ec4899"/>
+                    <circle cx="22"  cy="130" r="3.5" fill="#3b82f6"/>
+                  </g>
+                  <!-- Reverse inner orbit -->
+                  <g style="transform-origin:130px 130px; animation: sceneRotate 12s linear infinite reverse;">
+                    <circle cx="130" cy="48" r="2.5" fill="#22d3ee"/>
+                    <circle cx="212" cy="130" r="2.5" fill="#a855f7"/>
+                    <circle cx="130" cy="212" r="2.5" fill="#ec4899"/>
+                    <circle cx="48"  cy="130" r="2.5" fill="#3b82f6"/>
+                  </g>
+                  <!-- Token chips -->
+                  <g font-family="Space Grotesk" font-size="8" fill="rgba(226,232,240,0.7)" letter-spacing="1.5">
+                    <text x="130" y="14" text-anchor="middle">prompt →</text>
+                    <text x="246" y="134" text-anchor="end">embed</text>
+                    <text x="130" y="254" text-anchor="middle">← stream</text>
+                    <text x="14"  y="134" text-anchor="start">context</text>
+                  </g>
+                </svg>
               </div>
             </div>
-
-            <!-- Mini LLM viz in corner -->
-            <svg class="absolute -right-6 -bottom-6 w-40 h-40 opacity-60" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="svcAiG" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#22d3ee"/>
-                  <stop offset="1" stop-color="#ec4899"/>
-                </linearGradient>
-              </defs>
-              <circle cx="80" cy="80" r="30" fill="none" stroke="url(#svcAiG)" stroke-width="1.5">
-                <animate attributeName="r" values="28;34;28" dur="3s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="80" cy="80" r="14" fill="url(#svcAiG)" opacity="0.7"/>
-              <g style="transform-origin:80px 80px; animation: sceneRotate 16s linear infinite;">
-                <circle cx="80" cy="30" r="3" fill="#22d3ee"/>
-                <circle cx="130" cy="80" r="3" fill="#a855f7"/>
-                <circle cx="80" cy="130" r="3" fill="#ec4899"/>
-                <circle cx="30" cy="80" r="3" fill="#3b82f6"/>
-              </g>
-            </svg>
           </div>
         </div>
       </div>
@@ -2682,29 +2864,115 @@
         </div>
 
         <div class="relative">
-          <!-- Connecting line -->
-          <div class="hidden lg:block absolute top-9 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neon-purple to-transparent opacity-40"></div>
+          <!-- Animated connecting rail -->
+          <div class="hidden lg:block flow-rail"></div>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center reveal reveal-delay-1">
-              <div class="step-num mx-auto mb-5">1</div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Step 1 -->
+            <div class="step-card reveal reveal-delay-1" style="--step-c:#22d3ee;">
+              <div class="step-corner">PHASE · 01</div>
+              <div class="step-num mb-4" style="background:linear-gradient(135deg,#22d3ee,#3b82f6);">
+                <span class="step-label">1</span>
+                <span class="step-icon">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </span>
+              </div>
               <h4 class="font-display text-xl font-bold text-white mb-2">Discover</h4>
-              <p class="text-slate-400 text-sm">We dive deep into your requirements through workshops and technical audits.</p>
+              <p class="text-slate-400 text-sm leading-relaxed">We dive deep into your requirements through workshops and technical audits.</p>
+              <div class="step-meta">
+                <span>Workshops</span>
+                <span>Audits</span>
+              </div>
+              <div class="step-duration">~ 1 week</div>
             </div>
-            <div class="text-center reveal reveal-delay-2">
-              <div class="step-num mx-auto mb-5">2</div>
+
+            <!-- Step 2 -->
+            <div class="step-card reveal reveal-delay-2" style="--step-c:#a855f7;">
+              <div class="step-corner">PHASE · 02</div>
+              <div class="step-num mb-4" style="background:linear-gradient(135deg,#3b82f6,#a855f7);">
+                <span class="step-label">2</span>
+                <span class="step-icon">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                </span>
+              </div>
               <h4 class="font-display text-xl font-bold text-white mb-2">Design</h4>
-              <p class="text-slate-400 text-sm">We create UX/UI prototypes, architectural blueprints, and conduct security reviews.</p>
+              <p class="text-slate-400 text-sm leading-relaxed">We create UX/UI prototypes, architectural blueprints, and conduct security reviews.</p>
+              <div class="step-meta">
+                <span>UX/UI</span>
+                <span>Arch</span>
+                <span>SecOps</span>
+              </div>
+              <div class="step-duration">~ 2 weeks</div>
             </div>
-            <div class="text-center reveal reveal-delay-3">
-              <div class="step-num mx-auto mb-5">3</div>
+
+            <!-- Step 3 -->
+            <div class="step-card reveal reveal-delay-3" style="--step-c:#ec4899;">
+              <div class="step-corner">PHASE · 03</div>
+              <div class="step-num mb-4" style="background:linear-gradient(135deg,#a855f7,#ec4899);">
+                <span class="step-label">3</span>
+                <span class="step-icon">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                </span>
+              </div>
               <h4 class="font-display text-xl font-bold text-white mb-2">Develop</h4>
-              <p class="text-slate-400 text-sm">Using agile sprints, we build, test, and review code for optimal performance.</p>
+              <p class="text-slate-400 text-sm leading-relaxed">Using agile sprints, we build, test, and review code for optimal performance.</p>
+              <div class="step-meta">
+                <span>Agile</span>
+                <span>QA</span>
+                <span>Review</span>
+              </div>
+              <div class="step-duration">6 – 12 weeks</div>
             </div>
-            <div class="text-center reveal reveal-delay-4">
-              <div class="step-num mx-auto mb-5">4</div>
-              <h4 class="font-display text-xl font-bold text-white mb-2">Deploy & Scale</h4>
-              <p class="text-slate-400 text-sm">We manage CI/CD rollout, performance tuning, and offer 24/7 monitoring.</p>
+
+            <!-- Step 4 -->
+            <div class="step-card reveal reveal-delay-4" style="--step-c:#22d3ee;">
+              <div class="step-corner">PHASE · 04</div>
+              <div class="step-num mb-4" style="background:linear-gradient(135deg,#ec4899,#22d3ee);">
+                <span class="step-label">4</span>
+                <span class="step-icon">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </span>
+              </div>
+              <h4 class="font-display text-xl font-bold text-white mb-2">Deploy &amp; Scale</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">We manage CI/CD rollout, performance tuning, and offer 24/7 monitoring.</p>
+              <div class="step-meta">
+                <span>CI/CD</span>
+                <span>Perf</span>
+                <span>24/7</span>
+              </div>
+              <div class="step-duration">Ongoing</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workflow HUD strip -->
+        <div class="mt-14 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+          <div class="glass rounded-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-neon-cyan shadow-[0_0_10px_#22d3ee]"></span>
+            <div>
+              <div class="text-[0.58rem] uppercase tracking-[0.22em] text-slate-500" style="font-family:'Space Grotesk',sans-serif;">Median kickoff</div>
+              <div class="font-display text-base font-semibold text-white">5 days</div>
+            </div>
+          </div>
+          <div class="glass rounded-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-neon-purple shadow-[0_0_10px_#a855f7]"></span>
+            <div>
+              <div class="text-[0.58rem] uppercase tracking-[0.22em] text-slate-500" style="font-family:'Space Grotesk',sans-serif;">Sprint length</div>
+              <div class="font-display text-base font-semibold text-white">2 weeks</div>
+            </div>
+          </div>
+          <div class="glass rounded-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-neon-pink shadow-[0_0_10px_#ec4899]"></span>
+            <div>
+              <div class="text-[0.58rem] uppercase tracking-[0.22em] text-slate-500" style="font-family:'Space Grotesk',sans-serif;">Test coverage</div>
+              <div class="font-display text-base font-semibold text-white">&gt; 85%</div>
+            </div>
+          </div>
+          <div class="glass rounded-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-neon-blue shadow-[0_0_10px_#3b82f6]"></span>
+            <div>
+              <div class="text-[0.58rem] uppercase tracking-[0.22em] text-slate-500" style="font-family:'Space Grotesk',sans-serif;">Release cadence</div>
+              <div class="font-display text-base font-semibold text-white">Weekly</div>
             </div>
           </div>
         </div>
@@ -2832,45 +3100,49 @@
 
         <div class="marquee reveal">
           <div class="marquee-track">
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/python/22d3ee" alt="Python" title="Python"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" title="JavaScript"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" title="TypeScript"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/amazonwebservices/FF9900" alt="AWS" title="AWS"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/microsoftazure/0078D4" alt="Azure" title="Azure"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/googlecloud/4285F4" alt="GCP" title="GCP"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" title="Docker"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/kubernetes/326CE5" alt="Kubernetes" title="Kubernetes"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/tensorflow/FF6F00" alt="TensorFlow" title="TensorFlow"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/pytorch/EE4C2C" alt="PyTorch" title="PyTorch"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/openai/10a37f" alt="OpenAI" title="OpenAI"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/huggingface/FFD21E" alt="Hugging Face" title="Hugging Face"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/langchain/1C3C3C" alt="LangChain" title="LangChain"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/apacheairflow/017CEE" alt="Airflow" title="Airflow"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt="Spark" title="Spark"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" title="React"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" title="Node.js"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" title="PostgreSQL"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/terraform/7B42BC" alt="Terraform" title="Terraform"/></div>
+            <div class="tech-chip t-python"><span class="tech-dot"></span>Python</div>
+            <div class="tech-chip t-js"><span class="tech-dot"></span>JavaScript</div>
+            <div class="tech-chip t-ts"><span class="tech-dot"></span>TypeScript</div>
+            <div class="tech-chip t-aws"><span class="tech-dot"></span>AWS</div>
+            <div class="tech-chip t-azure"><span class="tech-dot"></span>Azure</div>
+            <div class="tech-chip t-gcp"><span class="tech-dot"></span>GCP</div>
+            <div class="tech-chip t-docker"><span class="tech-dot"></span>Docker</div>
+            <div class="tech-chip t-k8s"><span class="tech-dot"></span>Kubernetes</div>
+            <div class="tech-chip t-tf"><span class="tech-dot"></span>TensorFlow</div>
+            <div class="tech-chip t-pytorch"><span class="tech-dot"></span>PyTorch</div>
+            <div class="tech-chip t-openai"><span class="tech-dot"></span>OpenAI</div>
+            <div class="tech-chip t-hf"><span class="tech-dot"></span>Hugging Face</div>
+            <div class="tech-chip t-lc"><span class="tech-dot"></span>LangChain</div>
+            <div class="tech-chip t-claude"><span class="tech-dot"></span>Claude</div>
+            <div class="tech-chip t-llama"><span class="tech-dot"></span>Llama</div>
+            <div class="tech-chip t-airflow"><span class="tech-dot"></span>Airflow</div>
+            <div class="tech-chip t-spark"><span class="tech-dot"></span>Spark</div>
+            <div class="tech-chip t-react"><span class="tech-dot"></span>React</div>
+            <div class="tech-chip t-node"><span class="tech-dot"></span>Node.js</div>
+            <div class="tech-chip t-pg"><span class="tech-dot"></span>PostgreSQL</div>
+            <div class="tech-chip t-tf2"><span class="tech-dot"></span>Terraform</div>
             <!-- Duplicate for seamless loop -->
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/python/22d3ee" alt="Python" title="Python"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" title="JavaScript"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" title="TypeScript"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/amazonwebservices/FF9900" alt="AWS" title="AWS"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/microsoftazure/0078D4" alt="Azure" title="Azure"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/googlecloud/4285F4" alt="GCP" title="GCP"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" title="Docker"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/kubernetes/326CE5" alt="Kubernetes" title="Kubernetes"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/tensorflow/FF6F00" alt="TensorFlow" title="TensorFlow"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/pytorch/EE4C2C" alt="PyTorch" title="PyTorch"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/openai/10a37f" alt="OpenAI" title="OpenAI"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/huggingface/FFD21E" alt="Hugging Face" title="Hugging Face"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/langchain/1C3C3C" alt="LangChain" title="LangChain"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/apacheairflow/017CEE" alt="Airflow" title="Airflow"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt="Spark" title="Spark"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" title="React"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" title="Node.js"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" title="PostgreSQL"/></div>
-            <div class="tech-icon"><img src="https://cdn.simpleicons.org/terraform/7B42BC" alt="Terraform" title="Terraform"/></div>
+            <div class="tech-chip t-python"><span class="tech-dot"></span>Python</div>
+            <div class="tech-chip t-js"><span class="tech-dot"></span>JavaScript</div>
+            <div class="tech-chip t-ts"><span class="tech-dot"></span>TypeScript</div>
+            <div class="tech-chip t-aws"><span class="tech-dot"></span>AWS</div>
+            <div class="tech-chip t-azure"><span class="tech-dot"></span>Azure</div>
+            <div class="tech-chip t-gcp"><span class="tech-dot"></span>GCP</div>
+            <div class="tech-chip t-docker"><span class="tech-dot"></span>Docker</div>
+            <div class="tech-chip t-k8s"><span class="tech-dot"></span>Kubernetes</div>
+            <div class="tech-chip t-tf"><span class="tech-dot"></span>TensorFlow</div>
+            <div class="tech-chip t-pytorch"><span class="tech-dot"></span>PyTorch</div>
+            <div class="tech-chip t-openai"><span class="tech-dot"></span>OpenAI</div>
+            <div class="tech-chip t-hf"><span class="tech-dot"></span>Hugging Face</div>
+            <div class="tech-chip t-lc"><span class="tech-dot"></span>LangChain</div>
+            <div class="tech-chip t-claude"><span class="tech-dot"></span>Claude</div>
+            <div class="tech-chip t-llama"><span class="tech-dot"></span>Llama</div>
+            <div class="tech-chip t-airflow"><span class="tech-dot"></span>Airflow</div>
+            <div class="tech-chip t-spark"><span class="tech-dot"></span>Spark</div>
+            <div class="tech-chip t-react"><span class="tech-dot"></span>React</div>
+            <div class="tech-chip t-node"><span class="tech-dot"></span>Node.js</div>
+            <div class="tech-chip t-pg"><span class="tech-dot"></span>PostgreSQL</div>
+            <div class="tech-chip t-tf2"><span class="tech-dot"></span>Terraform</div>
           </div>
         </div>
       </div>
